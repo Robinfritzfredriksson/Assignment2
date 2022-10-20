@@ -1,0 +1,98 @@
+﻿<Window x:Class="Assignment2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Assignment2"
+        mc:Ignorable="d"
+        Title="Addressbook" Height="400" Width="650">
+    
+    <!--Delar in alla colummer och fält-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Grid.Column="0">
+            <!--Delar in alla rader-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Delar in alla colummer och fält-->
+            <StackPanel Grid.Row="0" Margin="15">
+                <TextBlock Text="Firstname" Style="{StaticResource label}"/>
+                <TextBox x:Name="tb_FirstName" Style="{StaticResource field}"/>
+
+                <TextBlock Text="Lastname" Style="{StaticResource label}"/>
+                <TextBox x:Name="tb_LastName" Style="{StaticResource field}"/>
+
+                <TextBlock Text="Street address" Style="{StaticResource label}"/>
+                <TextBox x:Name="tb_StreetAddress" Style="{StaticResource field}"/>
+
+                <TextBlock Text="Phonenumber" Style="{StaticResource label}"/>
+                <TextBox x:Name="tb_PhoneNumber" Style="{StaticResource field}"/>
+
+            </StackPanel>
+            
+            
+            <!--Knapp för att uppdatera som också har en funktion med en eventhandeler-->
+            <Button x:Name="btn_ADD"
+                    Click="btn_ADD_Click"
+                    Grid.Row="1" 
+                    Padding="25 5"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0,0,15,35" 
+                    Content="Save"/>
+            <!--Knapp för att uppdatera som också har en funktion med en eventhandeler-->
+            <Button x:Name="btn_Update"
+                    Click="btn_Update_Click"
+                    Grid.Row="1" 
+                    Padding="25 5"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom" 
+                    Margin="15,0,0,35" 
+                    Content="Update"/>
+
+        </Grid>
+
+
+
+        <ListView x:Name="lv_CONTACTS" SelectionChanged="lv_CONTACTS_SelectionChanged" Grid.Column="1" Margin="20" HorizontalContentAlignment="Stretch">
+            
+            <!--En Tamplate för hur det ska se ut och skriva ut-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center"> 
+                            <TextBlock Text="{Binding FullName}" FontSize="12"/>
+                            <TextBlock Text="{Binding PhoneNumber}" FontSize="10"/>
+                        </StackPanel>
+                        
+                        <!--Knapp för att ta bort-->
+                        <Button
+                            Click="btn_Remove_Click"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Grid.Column="1" 
+                            FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE74D;"/>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </Grid>
+</Window>
